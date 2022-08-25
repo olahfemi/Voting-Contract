@@ -7,14 +7,15 @@ contract Voting {
         bool choice;
 
     }
-
+    address[] public addr;
     mapping (address => Options) choices;
 
-    function MakeChoice(address addr, bool _choice) public {
-        choices[addr].choice = _choice;
+    function MakeChoice(bool _choice) public {
+        choices[msg.sender].choice = _choice;
+        addr.push(msg.sender);
     }
 
-    function ViewChoice(address addr) public view returns(bool) {
-        return choices[addr].choice;
+    function ViewChoice(address _addr) public view returns(bool) {
+        return choices[_addr].choice;
     }
 }
